@@ -1,0 +1,20 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0;
+  width: 300px;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.pagination li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  cursor: pointer;
+}

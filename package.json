@@ -1,0 +1,25 @@
+{
+  "name": "internet-shop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "internet-shop",
+  "scripts": {
+    "build": "webpack",
+    "prod": "webpack -p",
+    "start": "webpack-dev-server --open",
+    "eslint": "eslint src/**/*.js",
+    "test": "npm run eslint"
+  },
+  "devDependencies": {
+    "css-loader": "3.2.0",
+    "eslint": "6.1.0",
+    "eslint-config-htmlacademy": "0.5.2",
+    "style-loader": "1.0.0",
+    "webpack": "4.39.1",
+    "webpack-cli": "3.3.6",
+    "webpack-dev-server": "3.7.2"
+  },
+  "engines": {
+    "node": "10"
+  }
+}
