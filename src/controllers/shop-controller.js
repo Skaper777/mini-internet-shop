@@ -21,7 +21,6 @@ export default class ShopController {
     this._catalog = new Catalog();
     this._pagination = new Pagination(goods, 0);
     this._paginationContainer = new PaginationContainer();
-    this._mainPage = this._pagination.getElement().querySelector(`#page-0`);
 
     this._onPagerClick = this._onPagerClick.bind(this);
   }
@@ -62,7 +61,6 @@ export default class ShopController {
 
 
   _onPagerHandler() {
-    this._mainPage.classList.add(`pagination__btn--active`);
     document.addEventListener(`click`, this._onPagerClick);
   }
 
@@ -87,13 +85,9 @@ export default class ShopController {
       this._targetGoods = this._goods.slice().slice((this._goods.length) - goodsInPage, this._goods.length);
     }
 
-    if (target.id) {
+    if (target.id && !e.target.classList.contains(`good`)) {
       const id = target.id;
       const idNum = +/\d+/.exec(id);
-
-      this._mainPage.classList.remove(`pagination__btn--active`);
-      this._mainPage = this._pagination.getElement().querySelector(`#${id}`);
-      this._mainPage.classList.add(`pagination__btn--active`);
 
       const startPos = idNum * goodsInPage;
       const lastPos = startPos + goodsInPage;

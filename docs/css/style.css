@@ -1,3 +1,8 @@
+#app {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 .pagination {
   display: flex;
   justify-content: space-between;
@@ -6,6 +11,11 @@
   width: 300px;
   margin: 0 auto;
   list-style: none;
+}
+
+.pagination__first,
+.pagination__last {
+  padding: 0 5px;
 }
 
 .pagination li {
@@ -17,4 +27,31 @@
   border: 1px solid grey;
   border-radius: 3px;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+.pagination li:hover {
+  border-color: blue;
+}
+
+.pagination__btn--actie {
+  border-color: blue;
+}
+
+.goods {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.good {
+  width: 150px;
+}
+
+.good h2 {
+  text-align: center;
+}
+
+.good img {
+  max-width: 100%;
 }
