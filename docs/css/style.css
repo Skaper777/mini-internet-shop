@@ -55,3 +55,8 @@
 .good img {
   max-width: 100%;
 }
+
+.cart__item {
+  border: 1px solid grey;
+  margin-bottom: 10px;
+}

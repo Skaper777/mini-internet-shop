@@ -10,6 +10,7 @@ export default class Cart extends AbstractComponent {
   getTemplate() {
     return `
     <section class="cart">
+      <h2>Корзина</h2>
     </section>
     `.trim();
   }

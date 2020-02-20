@@ -3,6 +3,7 @@ import Pagination from '../components/pagination';
 import PaginationContainer from '../components/pagination-container';
 import Goods from '../components/goods';
 import Good from '../components/good';
+import CartController from './cart-controller';
 import {
   render,
   Position
@@ -11,12 +12,14 @@ import {
  * Класс контроллера магазина
  */
 export default class ShopController {
-  constructor(container, goods) {
+  constructor(container, goods, store) {
     this._container = container;
     this._goods = goods;
     this._goodsContainer = new Goods();
     this._startPos = 0;
     this._lastPos = 15;
+    this._store = store;
+    this._cartController = new CartController(container, store);
     this._targetGoods = this._goods.slice().slice(this._startPos, this._lastPos);
     this._catalog = new Catalog();
     this._pagination = new Pagination(goods, 0);
@@ -34,6 +37,7 @@ export default class ShopController {
 
     render(this._container, this._paginationContainer.getElement(), Position.BEFOREEND);
 
+    this._cartController.init();
     this._renderPagination(0);
     this._onPagerHandler();
   }
@@ -45,7 +49,7 @@ export default class ShopController {
     render(this._catalog.getElement(), this._goodsContainer.getElement(), Position.AFTERBEGIN);
 
     this._targetGoods.forEach((data) => {
-      const good = new Good(data);
+      const good = new Good(data, this._store, this._cartController);
       render(this._goodsContainer.getElement(), good.getElement(), Position.BEFOREEND);
     });
   }
@@ -85,7 +89,7 @@ export default class ShopController {
       this._targetGoods = this._goods.slice().slice((this._goods.length) - goodsInPage, this._goods.length);
     }
 
-    if (target.id && !e.target.classList.contains(`good`)) {
+    if (target.id && !e.target.classList.contains(`good`) && !e.target.classList.contains(`cart__item`)) {
       const id = target.id;
       const idNum = +/\d+/.exec(id);
 

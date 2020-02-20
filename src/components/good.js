@@ -1,19 +1,26 @@
 import AbstractComponent from './abstract';
-import Store from '../cart-store';
 /**
  * Класс шаблона для товара
  */
-const store = new Store();
 
 export default class Good extends AbstractComponent {
-  constructor({id, title, image, descr, price, available}) {
+  constructor({
+    _id,
+    _title,
+    image,
+    descr,
+    _price,
+    available
+  }, store, cartController) {
     super();
-    this._id = id;
-    this._title = title;
+    this._id = _id;
+    this._title = _title;
     this._image = image;
     this._descr = descr;
-    this._price = price;
+    this._price = _price;
+    this._store = store;
     this._available = available;
+    this._cartController = cartController;
     this._count = this._getCount();
 
     this._onBuyHandler();
@@ -21,17 +28,20 @@ export default class Good extends AbstractComponent {
 
   _onBuyHandler() {
     this.getElement().querySelector(`.good__cart-btn`).addEventListener(`click`, () => {
-      store.setItem({
-        id: this._id,
-        title: this._title,
-        price: this._price,
-        count: this._count + 1
-      });
+      const good = {
+        _id: this._id,
+        _title: this._title,
+        _price: this._price,
+        _count: this._count + 1
+      };
+
+      this._store.setItem(good);
+      this._cartController.renderCartItems();
     });
   }
 
   _getCount() {
-    return store.getItemCount(this._id);
+    return this._store.getItemCount(this._id);
   }
 
   getTemplate() {
